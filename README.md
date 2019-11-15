@@ -44,6 +44,7 @@ java -cp Variant-Kudu.jar org.scut.util.SaveInKudu
 -vcf_path /path/chr1.vcf
 -ped_path /path/chr1_sample.ped
 -table_name chr1
+```
 
 2.generate distributed bitmap index on HDFS
 
@@ -57,6 +58,7 @@ java -cp Variant-Kudu.jar org.scut.util.SaveInBitmap
 -hadoop_master 192.168.0.100:50070
 -table_name chr1
 -bitmap_path /root/chr1/
+```
 
 3.query by SQL syntax.
 In this function, we can do variation data analyze using SQL. When a query "select count(*) from chr1-6 where hg00100=’0|0’ and hg00096=’1|0’ and NA12076=’0|0’, we would parse the hg00100=’0|0’ and hg00096=’1|0’ and NA12076=’0|0’" is input, the columns involved is hg00096, hg00100, and NA12076. This is a genotype-information-involved query and would be executed by distributed bitmap index.
@@ -72,6 +74,7 @@ java -cp Variant-Kudu.jar org.scut.util.Query
 -impala_master 192.168.0.10:21000
 -hadoop_master 192.168.0.100:50070
 -bitmap_path /root/chr1/
+```
 
 4.query by parametric syntax
 The style of this implementation is similar to GQT. The parametric analyze of genetic variation data would be execute on distributed bitmap index. Genotype queries are composed of a set of predefined values and functions
@@ -94,3 +97,4 @@ java -cp Variant-Kudu.jar org.scut.util.QueryBitmap
 -bitmap_path /root/chr1/
 -functions count(HET HOM_ALT)
 -p ('GBR', 'YRI', 'MSL')
+```
