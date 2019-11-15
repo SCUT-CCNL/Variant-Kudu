@@ -1,0 +1,2 @@
+. filter=lfs diff=lfs merge=lfs -text
+Variant-Kudu.jar filter=lfs diff=lfs merge=lfs -text
